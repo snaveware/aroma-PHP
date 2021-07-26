@@ -11,8 +11,8 @@
                 </div>
                
                 <div class="btns">
-                    <a href="<?= $this->base_url?>/services.html" class="btn">Services</a>
-                    <a href="<?= $this->base_url?>/products.html" class="btn">Products</a>
+                    <a href="<?= $this->base_url?>/services" class="btn">Services</a>
+                    <a href="<?= $this->base_url?>/products" class="btn">Products</a>
                 </div>
                 
             </section>
