@@ -40,7 +40,7 @@
       public $helpers_folder = "Application/helpers";
       public $libraries_folder="Application/libraries";
       public $__404page="Not_Found";
-      public $deny_absolute_paths=true;
+      public $deny_absolute_paths=true; // stops all access that ends with a .php
       public $file_engine = "File_Engine";
       public function route_regex()
       {
@@ -59,7 +59,7 @@
          return $regex;
       }
 
-      public function routes()
+      public function routes($method = null)
       {
          //regex=:any,:number,:string
          //can add more routes here
@@ -69,40 +69,67 @@
          all other parameters are sent to the method as an array
          */ 
          $routes=array();
-         $routes['/']="Home";
-         $routes['/image/:any']="File/image/:1";
-         $routes['/video/:any'] ="File/video/:1";
-         $routes['/doc/:any'] = "File/document/:1";
-         $routes['/image/:any/:any'] = "File/image/:1/:2";
-         $routes['/video/:any/:any'] = "File/video/:1/:2";
-         $routes['/doc/:any/:any'] = "File/document/:1/:2";
-         return $routes;
+         $GET_routes['/']="Home";
+         $GET_routes['/image/:any']="File/image/:1";
+         $GET_routes['/video/:any'] ="File/video/:1";
+         $GET_routes['/doc/:any'] = "File/document/:1";
+         $GET_routes['/image/:any/:any'] = "File/image/:1/:2";
+         $GET_routes['/video/:any/:any'] = "File/video/:1/:2";
+         $GET_routes['/doc/:any/:any'] = "File/document/:1/:2";
+
+         $POST_routes = array();
+
+         $PUT_routes = array();
+
+         $DELETE_routes  = array();
+
+         switch (isset($method) ? strtolower($method) : $method) {
+            case 'post':
+               return $POST_routes;
+               break;
+            case 'put':
+               return $PUT_routes;
+               break;
+            
+            case "delete" :
+               return $DELETE_routes;
+               break;
+            
+            default:
+               return $GET_routes;
+               break;
+            
+         }
       }
+
       public function database()
       {
          $db= array();
          /*
          change database configurations
          mysql database
-         pdo connection are used
+         Pdo connection are used
+         Default fechmode = FETCH_ASSOC
          */
 
          $db["host"]="localhost";
          $db["user"] = "root";
          $db["password"]="";
-         $db["name"]="newdb";
+         $db["name"]="aroma";
 
          return $db;
       }
+     
       public function restrict()
       {
          $folders=array();
          /*
-         add file folders which you dont want a basic user to have access to.
-         These folders should have images,videos,and docs subfolders.
-         example
-         $folders['folder name']= 'the method in authenticator 
-         library that will be called to authenticate a call to the folder';*/
+            Add file folders which you dont want a basic user to have access to.
+            These folders should have images,videos,and docs subfolders.
+            example
+            $folders['folder_name']= 'the method in authenticator 
+            library that will be called to authenticate a call to the folder';
+         */
          return $folders;
       }
    }//end class

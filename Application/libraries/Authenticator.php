@@ -7,7 +7,7 @@ class Authenticate extends Loader
       $logged_in = isset($_SESSION['id'])?true:false;
       return $logged_in;
 
-   }
+   } 
 }
 
 ?>

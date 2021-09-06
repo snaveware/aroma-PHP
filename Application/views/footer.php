@@ -7,10 +7,10 @@
             <section class="footer-nav">
                 <h2 class="title">Navigate</h2>
                 <nav class="footer-nav-links">
-                    <a href="/services.html">Services</a>
-                    <a href="/products.html"> Products</a>
-                    <a href="/about.html">About</a>
-                    <a href="/contact.html">Contact</a>
+                    <a href="<?=$this->base_url?>/services">Services</a>
+                    <a href="<?=$this->base_url?>/products"> Products</a>
+                    <a href="<?=$this->base_url?>/about">About</a>
+                    <a href="<?=$this->base_url?>/contact">Contact</a>
                 </nav>
             </section>
             <section class="footer-Contact">
@@ -29,7 +29,7 @@
         </div>
         <p class="copyright">
             <i class="fa fa-copyright"></i>
-            Copyright 2021.  Aroma Hotel. All Rights Reserved. 
+            Copyright 2021.  Aroma Hotel. All Rights Reserved. Made with love by @evans 
         </p>
     </div>
 </body>

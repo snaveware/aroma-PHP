@@ -12,6 +12,8 @@ body{
     --primary: #181108;
     --font: #4A4A4A;
     --grey: #e2d3d3;
+    --red: #fe0000;
+    --green: #15db15;
     color: var(--font);
     width:100%;
    
@@ -417,10 +419,27 @@ body{
     font-size: 1rem;
 }
 
+
+
 .input input:hover,.input input:focus{
     outline: none;
     border: none;
     background: transparent;
+}
+
+#submit-btn{
+    border: none;
+    outline: none;
+    background: var(--secondary);
+    color: var(--white);
+    font-size: 1rem;
+    display: block;
+    min-height: 30px;
+    width: 50%;
+    min-width: 60px;
+    padding: 5px 10px;
+    margin: auto;
+    border-radius: 30px;
 }
 
 .contact .img{
@@ -537,16 +556,24 @@ body{
     color: var(--primary);
 }
 
-.errors{
+.errors,.success{
     width:80%;
     height: max-content;
     margin: 0 auto;
+    
 }
-.error{
-    font-size: 1rem;
-    color:var(--white);
-    border: 1px solid var(var(--secondary)) !important;
 
+.error,.success{
+    font-size: 1rem;
+    color:var(--red);
+    border: 1px solid var(--secondary) !important;
+    padding: 2px;
+    margin: 5px auto;
+}
+
+.success{
+    color:var(--green);
+    border: 1px solid var(--white) !important;
 }
 
 

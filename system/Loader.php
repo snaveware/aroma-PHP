@@ -1,9 +1,18 @@
 <?php
   include_once"./$system_folder/Config.php";
+  /*
+    autoloads files declared in the autoload system file
+    connects to database
+    contains functions to load files such as views,models,libraries,helpers
+  */
+  
+  
   class Loader extends Config {
     public function __construct()
     {
       $this->autoload();
+
+      $this->conn = $this->connect();
       
     }
 
@@ -54,7 +63,7 @@
       $_helper = array();
       $_library = array();
       $system_folder = $this->system_folder;
-      include_once "./$system_folder/autoload.php";
+      include_once "./$system_folder/autoloads.php";
       $models = $_model;
       $libraries = $_library;
       $helpers = $_helper;
@@ -85,15 +94,23 @@
 
     public function connect()
     {
+      
       $db_configs = $this->database();
 
-      $dns = 'mysql:host='.$db_configs['host'].';dbname='.$db_configs['name'];
+      try {
+        $dns = 'mysql:host='.$db_configs['host'].';dbname='.$db_configs['name'];
       
-      $pdo = new PDO($dns,$db_configs['user'],$db_configs['password']);
-      
-      $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);
+        $conn = new PDO($dns,$db_configs['user'],$db_configs['password']);
+        
+        $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);
 
-      return $pdo;
+        return $conn;
+
+      } catch (Throwable $th) {
+        echo "Unable to create database connection: ".$th.getMessage();
+      }
+
+      
     }
   }//end class
 ?>

@@ -3,7 +3,7 @@
   name: sniper routing engine
   version:1.0;
   Author: Evans Mwenda Munene
-  Email:evansmwenda006@gmail.com
+  Email:work.evans020@@gmail.com
   description: {
     1.Based on mvc model
     2.Routes urls and prevents direct access ot pages
@@ -16,16 +16,15 @@
 
 
 
-   session_Start();
-  // $_SESSION['id']=1;
-  //session_unset();
-  //session_destroy();
+  session_Start();
+
   include_once "./system/Config.php";
   $system_folder = Config::$the_system_folder;
   include_once "./$system_folder/Loader.php";
 
   $loader = new Loader;
   $request_uri=$_SERVER['REQUEST_URI'];
+  $method = $_SERVER['REQUEST_METHOD'];
   $deny_absolutes_paths = $loader->is_path_absolute($request_uri);
   if($deny_absolutes_paths)
   {
@@ -37,6 +36,6 @@
     $path=isset($_SERVER['PATH_INFO']) ?$_SERVER['PATH_INFO']: "/";
   }
   require_once "./$system_folder/Engine.php";
-  $router = new Router($path);
-  $router->__constructor($path);
+  $router = new Router($path,$method);
+
   ?>

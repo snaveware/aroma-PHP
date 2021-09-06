@@ -14,19 +14,51 @@
     </div>
 
     <div class="contact">
-        <form action="" class="contact-form">
+        <form id="contact-form"class="contact-form" method="post" action="<?= $this->base_url?>/contact/message">
             <h2 class="section-title">Talk to Us</h2>
-            <div id="contact-errors"></div>
-            <div class="input">
-                <input type="text" id="name" placeholder="Name">
+            <?php
+                $success_display = isset($data['success']) ? 'block': 'none';
+            ?>
+            <p class="success" id="contact-success" style="display:<?= $success_display ?>">
+                <?php
+                    if(isset($data['success']))
+                   { ?>
+                        <?= 'Thank You for your message we shall reach out shortly.'?>
+                    <?php
+                   }
+                ?>
+            </p>
+            <div class="errors" id="contact-errors">
+                <?php
+                    if(isset($data['errors']))
+                   
+                    { 
+                        $i=0;
+                        for($i; $i<count($data['errors']); $i++)
+                        {?>
+
+                        <p class="error"><?= $data['errors'][$i] ?></p>
+
+                        <?php
+                        } 
+                    }
+                ?>
             </div>
             <div class="input">
-                <input type="email" id="email" placeholder="Email">
+                <input type="text" id="name"  name="name" placeholder="Name" required>
             </div>
-            <textarea name="" id="message" cols="30" rows="10"placeholder="Message"></textarea>
+            <div class="input">
+                <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
+            <textarea name="message" id="message" cols="30" rows="10"placeholder="Message" required></textarea>
+            
+            <input type="submit" id="submit-btn" >
+           
         </form>
         
         <img src="<?= $this->base_url?>/image/contact.jpg" class="img" alt="">
         
     </div>
+
+    <script src="<?= $this->base_url ?>/assets/scripts/contact.js"></script>
 <?php $this->view('footer');?>
